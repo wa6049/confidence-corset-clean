@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Confidence Corset | Interactive Experience</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --cream: #faf8f5;
+            --blush: #f8e8e8;
+            --rose: #d4a5a5;
+            --burgundy: #722f37;
+            --wine: #4a1c24;
+            --gold: #c9a959;
+            --gold-light: #e8d5a3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cream);
+            color: var(--black);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 3rem;
+            box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--burgundy);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--burgundy);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: url('images/Jean-Paul_Gaultier_bustier_Montreal_expo_2011.jpg') center/cover;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--cream) 0%, transparent 30%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            padding: 0 5rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--blush);
+            padding: 0.6rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--burgundy);
+            margin-bottom: 2rem;
+            border: 1px solid var(--rose);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--wine);
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            color: var(--burgundy);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--burgundy);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(114, 47, 55, 0.3);
+        }
+
+        .hero-cta:hover {
+            background: var(--wine);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(114, 47, 55, 0.4);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--burgundy);
+            font-size: 0.85rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 3rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--blush);
+            color: var(--burgundy);
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--wine);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--wine);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-suffix {
+            font-size: 2rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* Featured Image */
+        .featured-section {
+            padding: 0;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .featured-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .featured-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+        }
+
+        .featured-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Article */
+        .article-section {
+            background: white;
+        }
+
+        .article-content {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .article-intro {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.9;
+            color: var(--burgundy);
+            border-left: 4px solid var(--gold);
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.8rem;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--wine);
+            margin: 4rem 0 1.5rem;
+        }
+
+        .pull-quote {
+            background: linear-gradient(135deg, var(--burgundy), var(--wine));
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            position: absolute;
+            top: 0;
+            left: 1.5rem;
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .pull-quote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: center;
+            color: white;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Image Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Polls */
+        .poll-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 60px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .poll-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--wine);
+            margin-bottom: 2rem;
+        }
+
+        .poll-option {
+            background: var(--cream);
+            border: 2px solid transparent;
+            padding: 1.2rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 0.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .poll-option:hover {
+            border-color: var(--rose);
+            transform: translateX(8px);
+        }
+
+        .poll-option.selected {
+            border-color: var(--burgundy);
+            background: var(--blush);
+        }
+
+        .poll-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--blush), var(--rose));
+            width: 0;
+            transition: width 1s ease;
+            opacity: 0.5;
+        }
+
+        .poll-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .poll-text {
+            font-weight: 500;
+        }
+
+        .poll-percent {
+            font-weight: 700;
+            color: var(--burgundy);
+        }
+
+        .poll-total {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        /* Slider */
+        .slider-card {
+            background: linear-gradient(135deg, var(--blush), white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border: 1px solid var(--rose);
+        }
+
+        .slider-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--wine);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .slider-input {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--burgundy));
+            -webkit-appearance: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--burgundy);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: grab;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--burgundy);
+        }
+
+        /* Quiz */
+        .quiz-section {
+            background: linear-gradient(135deg, var(--wine), var(--burgundy));
+            position: relative;
+        }
+
+        .quiz-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2.5H0V11h20V8.5H0V6h20V3.5H0V1h20V0h2v20h18v2H22v18h-2V22H0v-2h20v.5z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+
+        .quiz-header {
+            background: var(--cream);
+            padding: 2.5rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quiz-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--wine);
+        }
+
+        .quiz-header p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .progress-bar-container {
+            height: 6px;
+            background: #eee;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            width: 14.28%;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-body {
+            padding: 2.5rem;
+        }
+
+        .question-section {
+            display: none;
+        }
+
+        .question-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--burgundy), var(--wine));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--wine);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .option-item {
+            background: var(--cream);
+            border: 2px solid transparent;
+            padding: 1.2rem 1.5rem;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .option-item:hover {
+            border-color: var(--rose);
+            background: var(--blush);
+        }
+
+        .option-item.selected {
+            border-color: var(--burgundy);
+            background: var(--blush);
+        }
+
+        .option-item input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--burgundy);
+            cursor: pointer;
+        }
+
+        .scale-options {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+        }
+
+        .scale-item {
+            text-align: center;
+            padding: 1.2rem 0.5rem;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .scale-item:hover {
+            border-color: var(--rose);
+            transform: translateY(-3px);
+        }
+
+        .scale-item.selected {
+            background: var(--burgundy);
+            color: white;
+            border-color: var(--burgundy);
+        }
+
+        .scale-item .emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .scale-item .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 130px;
+            padding: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--burgundy);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 100px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--burgundy);
+            color: white;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            background: var(--wine);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--cream);
+            color: var(--burgundy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--blush);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--wine);
+            font-size: 1.1rem;
+            padding: 1.2rem 2rem;
+            box-shadow: 0 10px 30px rgba(201, 169, 89, 0.4);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 169, 89, 0.5);
+        }
+
+        .completion-screen {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .completion-screen h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--wine);
+            margin-bottom: 1rem;
+        }
+
+        /* Works Cited */
+        .works-cited {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .works-cited h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--wine);
+            margin-bottom: 1.5rem;
+        }
+
+        .works-cited p {
+            font-size: 0.95rem;
+            margin-left: 2rem;
+            text-indent: -2rem;
+            margin-bottom: 0.8rem;
+            color: #444;
+        }
+
+        .works-cited a {
+            color: var(--burgundy);
+            text-decoration: none;
+        }
+
+        .works-cited a:hover {
+            text-decoration: underline;
+        }
+
+        /* About */
+        .about-section {
+            background: var(--blush);
+        }
+
+        .about-card {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-card p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--wine);
+            color: white;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--burgundy);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-bg {
+                width: 100%;
+                height: 50vh;
+                position: relative;
+            }
+
+            .hero {
+                flex-direction: column-reverse;
+            }
+
+            .hero-content {
+                padding: 3rem 2rem;
+                max-width: 100%;
+            }
+
+            .hero-bg::after {
+                background: linear-gradient(0deg, var(--cream) 0%, transparent 50%);
+            }
+
+            .scroll-hint {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scale-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .scale-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            .btn-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">The Confidence Corset</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#article">Article</a></li>
+            <li><a href="#polls">Polls</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <span class="hero-tag">Interactive Critical Analysis</span>
+            <h1>The <span>Confidence</span> Corset</h1>
+            <p class="hero-subtitle">How Restrictive Clothing Increases Women's Confidence, and What That Reveals About Patriarchy</p>
+            <a href="#article" class="hero-cta">Begin Your Journey</a>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <span>↓</span>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number"><span data-target="73">0</span><span class="stat-suffix">%</span></div>
+                    <div class="stat-label">of women wear uncomfortable shoes weekly</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><span data-target="6">0</span></div>
+                    <div class="stat-label">inches corsets reduced waists</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number"><span data-target="100">0</span><span class="stat-suffix">%</span></div>
+                    <div class="stat-label">of you deserve bodily autonomy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Image -->
+    <section class="featured-section">
+        <div class="featured-image" onclick="openLightbox('images/pexels-karola-g-5713295.jpg')">
+            <img src="images/pexels-karola-g-5713295.jpg" alt="Red high heels">
+            <div class="featured-caption">
+                <h3>"The stiletto: a symbol of empowerment or a tool of constraint?"</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Section -->
+    <section class="article-section" id="article">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Featured Article</span>
+                <h2 class="section-title">The Paradox of Empowerment</h2>
+            </div>
+
+            <div class="article-content">
+                <p class="article-intro">
+                    Picture a woman stepping into a boardroom in four-inch stilettos, her confidence soaring with each painful click against the floor. Imagine another woman pulling on shapewear so tight it restricts her breathing, yet feeling empowered as she smooths down her dress.
+                </p>
+
+                <p>This is the confidence corset: not just a Victorian relic, but a living paradox where restriction and empowerment intertwine in ways that expose the insidious mechanics of patriarchal ideology.</p>
+
+                <p>How can clothing that physically constrains us make us feel more confident? And what does this contradiction reveal about the systems that govern women's bodies?</p>
+
+                <!-- Poll 1 -->
+                <div id="polls" class="poll-card">
+                    <h3 class="poll-question">Have you ever felt more confident in restrictive clothing?</h3>
+                    <div class="poll-option" onclick="vote('poll1', 'yes')" data-poll="poll1">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Yes, definitely</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll1', 'sometimes')" data-poll="poll1">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Sometimes</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll1', 'no')" data-poll="poll1">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">No, never</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <p class="poll-total">0 votes — Click to vote</p>
+                </div>
+
+                <h2>The Seductive Logic of Restriction</h2>
+
+                <p>The answer lies in understanding how patriarchal ideology operates through normalized violence disguised as aspiration rather than overt force. Ideological criticism reveals that restrictive clothing functions to appear natural and desirable while actually serving structures of domination (Foss 237).</p>
+
+                <p>When we accept foot deformities from high heels as the price of professionalism, or organ compression from shapewear as the cost of beauty, we have internalized an ideology that equates women's worth with their ability to conform to painful standards.</p>
+
+                <!-- Image Gallery -->
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox('images/5524102748_9f8d557575_o.jpg')">
+                        <img src="images/5524102748_9f8d557575_o.jpg" alt="Vintage 1950s Red Stilettos">
+                        <div class="gallery-overlay">
+                            <span>Vintage 1950s Red Stilettos</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('images/Slut_Walk_Chicago.jpg')">
+                        <img src="images/Slut_Walk_Chicago.jpg" alt="SlutWalk Chicago">
+                        <div class="gallery-overlay">
+                            <span>SlutWalk: Reclaiming Autonomy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider - keeping emojis only here -->
+                <div class="slider-card">
+                    <h3 class="slider-question">How much pressure do you feel to wear restrictive clothing?</h3>
+                    <input type="range" min="0" max="100" value="50" class="slider-input" id="pressureSlider">
+                    <div class="slider-labels">
+                        <span>😌 No Pressure</span>
+                        <span>😓 Extreme Pressure</span>
+                    </div>
+                    <div class="slider-value" id="sliderValue">50% 😐</div>
+                </div>
+
+                <p>This is the brilliance of oppressive systems: they convince the oppressed to participate willingly, even enthusiastically, in their own constraint. The confidence women feel in restrictive clothing is not imaginary—it is real, earned through successfully navigating a system that rewards conformity and punishes deviation.</p>
+
+                <h2>The Paradox of Empowerment</h2>
+
+                <p>Feminist criticism provides essential tools for analyzing this paradox, revealing how patriarchal systems have historically portrayed women's bodies as naturally deficient, requiring constant modification and restraint to achieve acceptability (Foss 142).</p>
+
+                <div class="pull-quote">
+                    <p>We must ask: whose definition of empowerment requires women to experience physical pain as a prerequisite for professional respect?</p>
+                </div>
+
+                <!-- Poll 2 -->
+                <div class="poll-card">
+                    <h3 class="poll-question">Can women feel truly empowered while also being products of patriarchal conditioning?</h3>
+                    <div class="poll-option" onclick="vote('poll2', 'both')" data-poll="poll2">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Yes, both can be true</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll2', 'only-empowered')" data-poll="poll2">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">True empowerment is possible</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll2', 'only-conditioning')" data-poll="poll2">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">It's always conditioning</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll2', 'unsure')" data-poll="poll2">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">It's complicated</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <p class="poll-total">0 votes</p>
+                </div>
+
+                <h2>When Choice Is Not Free</h2>
+
+                <p>This is where rhetorical fallacy analysis becomes crucial. The fashion industry relies heavily on the false dilemma fallacy: either embrace restrictive clothing and feel confident, or reject it and feel unfeminine, unprofessional, or undesirable.</p>
+
+                <!-- Poll 3 -->
+                <div class="poll-card">
+                    <h3 class="poll-question">Which rhetorical fallacy do you see most in fashion marketing?</h3>
+                    <div class="poll-option" onclick="vote('poll3', 'false-dilemma')" data-poll="poll3">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">False Dilemma (wear it or be unprofessional)</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll3', 'tradition')" data-poll="poll3">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Appeal to Tradition (it's always been this way)</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll3', 'naturalistic')" data-poll="poll3">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Naturalistic Fallacy (women naturally want this)</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll3', 'victim-blaming')" data-poll="poll3">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Victim Blaming (you chose to wear it)</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <p class="poll-total">0 votes</p>
+                </div>
+
+                <h2>Digital Resistance</h2>
+
+                <p>Visual rhetoric offers hope for resistance. Movements like SlutWalk deploy visual rhetoric to reclaim women's bodily autonomy from systems that police female appearance.</p>
+
+                <!-- Featured image -->
+                <div class="gallery-grid" style="grid-template-columns: 1fr;">
+                    <div class="gallery-item" style="aspect-ratio: 16/9;" onclick="openLightbox('images/red-heels-cropped.jpg')">
+                        <img src="images/red-heels-cropped.jpg" alt="Red heels" style="object-position: bottom;">
+                        <div class="gallery-overlay">
+                            <span>Beauty standards: liberation or constraint?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poll 4 -->
+                <div class="poll-card">
+                    <h3 class="poll-question">How effective is social media activism in challenging beauty standards?</h3>
+                    <div class="poll-option" onclick="vote('poll4', 'very')" data-poll="poll4">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Very effective</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll4', 'somewhat')" data-poll="poll4">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Somewhat effective</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll4', 'not-very')" data-poll="poll4">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Not very effective</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll4', 'harmful')" data-poll="poll4">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Can be harmful (performative)</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <p class="poll-total">0 votes</p>
+                </div>
+
+                <h2>The Violence Normalized as Beauty</h2>
+
+                <p>Ideological criticism demands we name what we have been taught not to see: restrictive clothing is a form of normalized violence (Foss 237). When fashion requires physical pain, limited mobility, and health risks, yet we call this beauty rather than harm, we are witnessing ideology at work.</p>
+
+                <h2>Where Do We Go From Here?</h2>
+
+                <!-- Poll 5 -->
+                <div class="poll-card">
+                    <h3 class="poll-question">Can true empowerment exist within oppressive systems?</h3>
+                    <div class="poll-option" onclick="vote('poll5', 'yes')" data-poll="poll5">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Yes, individual empowerment is possible</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll5', 'no')" data-poll="poll5">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">No, we must dismantle systems first</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll5', 'both')" data-poll="poll5">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">Both can happen simultaneously</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" onclick="vote('poll5', 'false-dilemma')" data-poll="poll5">
+                        <div class="poll-bar"></div>
+                        <div class="poll-content">
+                            <span class="poll-text">This is a false dilemma</span>
+                            <span class="poll-percent">0%</span>
+                        </div>
+                    </div>
+                    <p class="poll-total">0 votes</p>
+                </div>
+
+                <p>True empowerment should not come with organ damage as a side effect. And true freedom means women can find power in any clothing—or none at all—without their choices determining their worth, their safety, or their humanity.</p>
+
+                <p>The corset may be a relic of the past, but its logic persists in every painful shoe, every restrictive undergarment, every dress code that prioritizes men's comfort over women's autonomy. Until we dismantle the ideology that makes restriction necessary for confidence, we are still wearing corsets. We have just learned to call them something else.</p>
+
+                <!-- Works Cited -->
+                <div class="works-cited">
+                    <h3>Works Cited</h3>
+                    <p>Bartlett, Laura. "How the Corset Trend is Empowering Women." <em>House of Coco</em>, Sept. 2023, <a href="https://houseofcoco.net/how-the-corset-trend-is-empowering-women/" target="_blank">houseofcoco.net</a>.</p>
+                    <p>Foss, Sonja K. "Feminist Criticism." <em>Rhetorical Criticism: Exploration and Practice</em>, 5th ed., Waveland Press, 2018, pp. 141-178.</p>
+                    <p>Foss, Sonja K. "Ideological Criticism." <em>Rhetorical Criticism: Exploration and Practice</em>, 5th ed., Waveland Press, 2018, pp. 237-78.</p>
+                    <p>Tylka, Tracy L., and Rachel M. Calogero. "Fiction, Fashion, and Function Finale." <em>Sex Roles</em>, vol. 65, 2011, pp. 447-460.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="quiz-container">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white;">Interactive Quiz</span>
+                <h2 class="section-title" style="color: white;">Share Your Perspective</h2>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <h3>Reader Engagement Questionnaire</h3>
+                    <p>Seven thoughtful questions to explore your experience</p>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="quiz-body">
+                    <!-- Question 1 -->
+                    <div class="question-section active" data-section="1">
+                        <span class="question-badge">Question 1 of 7</span>
+                        <h4 class="question-text">Which section of the article resonated most strongly with you?</h4>
+                        <div class="options-list">
+                            <label class="option-item">
+                                <input type="radio" name="q1" value="seductive">
+                                <span>The Seductive Logic of Restriction</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q1" value="paradox">
+                                <span>The Paradox of Empowerment</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q1" value="choice">
+                                <span>When Choice Is Not Free</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q1" value="digital">
+                                <span>Digital Resistance</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q1" value="violence">
+                                <span>The Violence Normalized as Beauty</span>
+                            </label>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" onclick="nextSection()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question-section" data-section="2">
+                        <span class="question-badge">Question 2 of 7</span>
+                        <h4 class="question-text">How strongly do you agree: "Women's confidence in restrictive clothing is a form of internalized oppression"?</h4>
+                        <div class="scale-options">
+                            <div class="scale-item" onclick="selectScale(this, 'q2', '1')">
+                                <span class="emoji">😤</span>
+                                <span class="label">Strongly Disagree</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q2', '2')">
+                                <span class="emoji">😕</span>
+                                <span class="label">Disagree</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q2', '3')">
+                                <span class="emoji">😐</span>
+                                <span class="label">Neutral</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q2', '4')">
+                                <span class="emoji">🙂</span>
+                                <span class="label">Agree</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q2', '5')">
+                                <span class="emoji">💯</span>
+                                <span class="label">Strongly Agree</span>
+                            </div>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+                            <button class="btn btn-primary" onclick="nextSection()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question-section" data-section="3">
+                        <span class="question-badge">Question 3 of 7</span>
+                        <h4 class="question-text">What's your personal experience with restrictive clothing?</h4>
+                        <div class="options-list">
+                            <label class="option-item">
+                                <input type="checkbox" name="q3" value="heels">
+                                <span>I regularly wear high heels</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="checkbox" name="q3" value="shapewear">
+                                <span>I use shapewear or compression garments</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="checkbox" name="q3" value="work">
+                                <span>My workplace has dress code requirements</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="checkbox" name="q3" value="avoid">
+                                <span>I actively avoid restrictive clothing</span>
+                            </label>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+                            <button class="btn btn-primary" onclick="nextSection()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="question-section" data-section="4">
+                        <span class="question-badge">Question 4 of 7</span>
+                        <h4 class="question-text">Do you believe fashion choices can ever be truly "free" under patriarchy?</h4>
+                        <div class="options-list">
+                            <label class="option-item">
+                                <input type="radio" name="q4" value="yes">
+                                <span>Yes, individual agency is always possible</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q4" value="no">
+                                <span>No, all choices are shaped by systems</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q4" value="partial">
+                                <span>Partially – awareness creates some freedom</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="q4" value="depends">
+                                <span>It depends on context</span>
+                            </label>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+                            <button class="btn btn-primary" onclick="nextSection()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question-section" data-section="5">
+                        <span class="question-badge">Question 5 of 7</span>
+                        <h4 class="question-text">How much has this article changed your perspective?</h4>
+                        <div class="scale-options">
+                            <div class="scale-item" onclick="selectScale(this, 'q5', '1')">
+                                <span class="emoji">🤷</span>
+                                <span class="label">Not At All</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q5', '2')">
+                                <span class="emoji">🤔</span>
+                                <span class="label">A Little</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q5', '3')">
+                                <span class="emoji">😊</span>
+                                <span class="label">Moderately</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q5', '4')">
+                                <span class="emoji">😮</span>
+                                <span class="label">Significantly</span>
+                            </div>
+                            <div class="scale-item" onclick="selectScale(this, 'q5', '5')">
+                                <span class="emoji">🤯</span>
+                                <span class="label">Completely</span>
+                            </div>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+                            <button class="btn btn-primary" onclick="nextSection()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="question-section" data-section="6">
+                        <span class="question-badge">Question 6 of 7</span>
+                        <h4 class="question-text">What actions might you consider after reading this?</h4>
+                        <div class="options-list">
+                            <label class="option-item">
+                                <input type="checkbox" name="q6" value="question">
+                                <span>Question my clothing choices more critically</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="checkbox" name="q6" value="comfort">
+                                <span>Prioritize comfort over aesthetics</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="checkbox" name="q6" value="advocate">
+                                <span>Advocate for flexible dress codes</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="checkbox" name="q6" value="discuss">
+                                <span>Discuss these ideas with others</span>
+                            </label>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+                            <button class="btn btn-primary" onclick="nextSection()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="question-section" data-section="7">
+                        <span class="question-badge">Question 7 of 7</span>
+                        <h4 class="question-text">Share any thoughts or personal experiences:</h4>
+                        <textarea name="q7" placeholder="Your response helps us understand diverse perspectives..."></textarea>
+                        <div class="btn-row" style="flex-direction: column; gap: 1rem;">
+                            <button class="btn btn-submit" onclick="submitForm()">Submit Your Responses</button>
+                            <button class="btn btn-secondary" onclick="prevSection()" style="width: 100%;">Back</button>
+                        </div>
+                    </div>
+
+                    <!-- Completion -->
+                    <div class="question-section" data-section="complete">
+                        <div class="completion-screen">
+                            <h3>Thank You!</h3>
+                            <p style="color: #666; margin-bottom: 1rem;">Your perspectives help continue this important conversation about bodily autonomy and empowerment.</p>
+                            <p style="color: var(--burgundy); font-weight: 600;">Keep questioning. Keep dismantling.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">About</span>
+                <h2 class="section-title">About This Project</h2>
+            </div>
+            <div class="about-card">
+                <p>This interactive website explores the complex relationship between restrictive clothing, women's confidence, and patriarchal systems through feminist criticism, ideological criticism, and visual rhetoric.</p>
+                <p>Our goal is to spark meaningful conversations about bodily autonomy, empowerment, and the systems that shape our choices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-logo">The Confidence Corset</p>
+        <p class="footer-tagline">An Interactive Critical Analysis</p>
+        <p>Keep questioning. Keep dismantling.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <img src="" alt="Full size" id="lightboxImg">
+    </div>
+
+    <script>
+        // Navigation scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
+        // Poll System
+        const pollData = {
+            poll1: { votes: {yes: 0, sometimes: 0, no: 0}, total: 0, voted: false },
+            poll2: { votes: {both: 0, 'only-empowered': 0, 'only-conditioning': 0, unsure: 0}, total: 0, voted: false },
+            poll3: { votes: {'false-dilemma': 0, tradition: 0, naturalistic: 0, 'victim-blaming': 0}, total: 0, voted: false },
+            poll4: { votes: {very: 0, somewhat: 0, 'not-very': 0, harmful: 0}, total: 0, voted: false },
+            poll5: { votes: {yes: 0, no: 0, both: 0, 'false-dilemma': 0}, total: 0, voted: false }
+        };
+
+        function vote(pollId, option) {
+            if (pollData[pollId].voted) return;
+            
+            pollData[pollId].votes[option]++;
+            pollData[pollId].total++;
+            pollData[pollId].voted = true;
+            
+            const pollCard = document.querySelector(`[data-poll="${pollId}"]`).closest('.poll-card');
+            const options = pollCard.querySelectorAll('.poll-option');
+            
+            options.forEach(opt => {
+                const onclick = opt.getAttribute('onclick');
+                const match = onclick.match(/'([^']+)'\)/);
+                if (!match) return;
+                
+                const optValue = match[1];
+                const votes = pollData[pollId].votes[optValue];
+                const pct = Math.round((votes / pollData[pollId].total) * 100);
+                
+                opt.querySelector('.poll-bar').style.width = pct + '%';
+                opt.querySelector('.poll-percent').textContent = pct + '%';
+                opt.style.pointerEvents = 'none';
+            });
+            
+            pollCard.querySelector('.poll-total').textContent = `${pollData[pollId].total} vote${pollData[pollId].total !== 1 ? 's' : ''} — Thanks for voting!`;
+        }
+
+        // Slider
+        const slider = document.getElementById('pressureSlider');
+        const sliderValue = document.getElementById('sliderValue');
+        
+        slider.addEventListener('input', function() {
+            const v = this.value;
+            let emoji = '😌';
+            if (v > 80) emoji = '😰';
+            else if (v > 60) emoji = '😓';
+            else if (v > 40) emoji = '😐';
+            else if (v > 20) emoji = '🙂';
+            sliderValue.textContent = `${v}% ${emoji}`;
+        });
+
+        // Stats Animation
+        const animateStats = () => {
+            document.querySelectorAll('[data-target]').forEach(stat => {
+                const target = parseInt(stat.dataset.target);
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 30);
+            });
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.stat-item').forEach(el => statsObserver.observe(el));
+
+        // Quiz
+        let currentSection = 1;
+        const totalSections = 7;
+        const responses = {};
+
+        function updateProgress() {
+            document.getElementById('progressBar').style.width = (currentSection / totalSections) * 100 + '%';
+        }
+
+        function nextSection() {
+            document.querySelector(`[data-section="${currentSection}"]`).classList.remove('active');
+            currentSection = Math.min(currentSection + 1, totalSections);
+            document.querySelector(`[data-section="${currentSection}"]`).classList.add('active');
+            updateProgress();
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function prevSection() {
+            document.querySelector(`[data-section="${currentSection}"]`).classList.remove('active');
+            currentSection = Math.max(currentSection - 1, 1);
+            document.querySelector(`[data-section="${currentSection}"]`).classList.add('active');
+            updateProgress();
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.option-item').forEach(opt => {
+            opt.addEventListener('click', function() {
+                const input = this.querySelector('input');
+                if (input.type === 'radio') {
+                    this.closest('.options-list').querySelectorAll('.option-item').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                } else {
+                    this.classList.toggle('selected');
+                }
+            });
+        });
+
+        function selectScale(el, name, value) {
+            el.parentElement.querySelectorAll('.scale-item').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+            responses[name] = value;
+        }
+
+        function submitForm() {
+            document.querySelector(`[data-section="${currentSection}"]`).classList.remove('active');
+            document.querySelector('[data-section="complete"]').classList.add('active');
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        updateProgress();
+
+        // Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+        document.getElementById('lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
+    </script>
+</body>
+</html>
