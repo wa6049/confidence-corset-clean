@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Confidence Corset | Interactive Experience</title>
-  
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --black: #0a0a0a;
+            --black: #2d0000;
             --white: #ffffff;
-            --cream: #faf8f5;
-            --blush: #f8e8e8;
-            --rose: #d4a5a5;
-            --burgundy: #722f37;
-            --wine: #4a1c24;
-            --gold: #c9a959;
-            --gold-light: #e8d5a3;
+            --cream: #fff8f8;
+            --pink-light: #ffdddd;
+            --pink: #ff8787;
+            --pink-medium: #fea2a2;
+            --pink-dark: #ff8484;
+            --red: #c41e3a;
+            --red-dark: #8b0000;
+            --red-darker: #660000;
         }
 
         * {
@@ -35,7 +35,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--cream);
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 50%, var(--pink-medium) 100%);
+            background-attachment: fixed;
             color: var(--black);
             line-height: 1.7;
             overflow-x: hidden;
@@ -59,14 +60,14 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 1rem 3rem;
-            box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 40px rgba(196, 30, 58, 0.15);
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--burgundy);
+            color: var(--red);
             text-decoration: none;
         }
 
@@ -78,7 +79,7 @@
 
         .nav-links a {
             text-decoration: none;
-             color: var(--burgundy);
+            color: var(--black);
             font-weight: 500;
             font-size: 0.95rem;
             position: relative;
@@ -92,12 +93,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gold);
+            background: var(--red);
             transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--burgundy);
+            color: var(--red);
         }
 
         .nav-links a:hover::after {
@@ -117,7 +118,7 @@
         .menu-toggle span {
             width: 25px;
             height: 2px;
-            background: var(--burgundy);
+            background: var(--red);
             transition: 0.3s;
         }
 
@@ -143,7 +144,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, var(--cream) 0%, transparent 30%);
+            background: linear-gradient(90deg, var(--pink-light) 0%, transparent 40%);
         }
 
         .hero-content {
@@ -155,14 +156,14 @@
 
         .hero-tag {
             display: inline-block;
-            background: var(--blush);
+            background: white;
             padding: 0.6rem 1.2rem;
             border-radius: 100px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: var(--burgundy);
+            color: var(--red);
             margin-bottom: 2rem;
-            border: 1px solid var(--rose);
+            border: 2px solid var(--pink-dark);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -173,50 +174,56 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            color: var(--wine);
+            color: var(--red-dark);
         }
 
         .hero h1 span {
             font-style: italic;
-            color: var(--burgundy);
+            color: var(--red);
         }
 
         .hero-subtitle {
             font-size: 1.15rem;
             color: #555;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1rem;
             line-height: 1.8;
+        }
+
+        .hero-author {
+            font-size: 1rem;
+            color: var(--red);
+            font-weight: 600;
+            margin-bottom: 2.5rem;
         }
 
         .hero-cta {
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            background: var(--burgundy);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             color: white;
             padding: 1rem 2rem;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(114, 47, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
         }
 
         .hero-cta:hover {
-            background: var(--wine);
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(114, 47, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(196, 30, 58, 0.5);
         }
 
         .scroll-hint {
             position: absolute;
             bottom: 3rem;
-            left: 11.5rem;
+            left: 5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            color: var(--burgundy);
+            color: var(--red);
             font-size: 0.85rem;
             animation: bounce 2s infinite;
         }
@@ -243,8 +250,8 @@
 
         .section-tag {
             display: inline-block;
-            background: var(--blush);
-            color: var(--burgundy);
+            background: white;
+            color: var(--red);
             padding: 0.5rem 1.5rem;
             border-radius: 100px;
             font-size: 0.85rem;
@@ -252,18 +259,19 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 1rem;
+            border: 2px solid var(--pink-dark);
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            color: var(--wine);
+            color: var(--red-dark);
         }
 
         /* Stats Section */
         .stats-section {
-            background: var(--wine);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 50%, var(--red-darker) 100%);
             color: white;
         }
 
@@ -282,8 +290,9 @@
             font-family: 'Playfair Display', serif;
             font-size: 4.5rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--pink-light);
             line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .stat-suffix {
@@ -326,7 +335,7 @@
             left: 0;
             right: 0;
             padding: 3rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            background: linear-gradient(transparent, rgba(139, 0, 0, 0.9));
             color: white;
         }
 
@@ -351,10 +360,13 @@
             font-size: 1.4rem;
             font-style: italic;
             line-height: 1.9;
-            color: var(--burgundy);
-            border-left: 4px solid var(--gold);
+            color: var(--red);
+            border-left: 5px solid var(--red);
             padding-left: 2rem;
             margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
+            padding: 2rem;
+            border-radius: 0 20px 20px 0;
         }
 
         .article-content p {
@@ -367,17 +379,20 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 600;
-            color: var(--wine);
+            color: var(--red-dark);
             margin: 4rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--pink-dark);
         }
 
         .pull-quote {
-            background: linear-gradient(135deg, var(--burgundy), var(--wine));
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             color: white;
             padding: 3rem;
             border-radius: 20px;
             margin: 3rem 0;
             position: relative;
+            box-shadow: 0 15px 40px rgba(196, 30, 58, 0.3);
         }
 
         .pull-quote::before {
@@ -402,6 +417,15 @@
             z-index: 1;
         }
 
+        .pull-quote cite {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            font-style: normal;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
         /* Image Gallery */
         .gallery-grid {
             display: grid;
@@ -415,8 +439,9 @@
             border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 4/5;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(196, 30, 58, 0.2);
             cursor: pointer;
+            border: 3px solid var(--pink-dark);
         }
 
         .gallery-item img {
@@ -433,7 +458,7 @@
         .gallery-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(transparent 50%, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent 50%, rgba(139, 0, 0, 0.9));
             opacity: 0;
             transition: opacity 0.3s;
             display: flex;
@@ -456,20 +481,20 @@
             border-radius: 24px;
             padding: 2.5rem;
             margin: 3rem 0;
-            box-shadow: 0 10px 60px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(196, 30, 58, 0.15);
+            border: 3px solid var(--pink-dark);
         }
 
         .poll-question {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             font-weight: 600;
-            color: var(--wine);
+            color: var(--red-dark);
             margin-bottom: 2rem;
         }
 
         .poll-option {
-            background: var(--cream);
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
             border: 2px solid transparent;
             padding: 1.2rem 1.5rem;
             border-radius: 14px;
@@ -481,13 +506,12 @@
         }
 
         .poll-option:hover {
-            border-color: var(--rose);
+            border-color: var(--red);
             transform: translateX(8px);
         }
 
         .poll-option.selected {
-            border-color: var(--burgundy);
-            background: var(--blush);
+            border-color: var(--red);
         }
 
         .poll-bar {
@@ -495,10 +519,10 @@
             left: 0;
             top: 0;
             height: 100%;
-            background: linear-gradient(90deg, var(--blush), var(--rose));
+            background: linear-gradient(90deg, var(--pink-medium), var(--pink-dark));
             width: 0;
             transition: width 1s ease;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
         .poll-content {
@@ -515,7 +539,7 @@
 
         .poll-percent {
             font-weight: 700;
-            color: var(--burgundy);
+            color: var(--red);
         }
 
         .poll-total {
@@ -527,27 +551,27 @@
 
         /* Slider */
         .slider-card {
-            background: linear-gradient(135deg, var(--blush), white);
+            background: linear-gradient(135deg, var(--pink-light) 0%, white 100%);
             border-radius: 24px;
             padding: 2.5rem;
             margin: 3rem 0;
-            border: 1px solid var(--rose);
+            border: 3px solid var(--pink-dark);
         }
 
         .slider-question {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 600;
-            color: var(--wine);
+            color: var(--red-dark);
             text-align: center;
             margin-bottom: 2rem;
         }
 
         .slider-input {
             width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(90deg, var(--rose), var(--burgundy));
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--red));
             -webkit-appearance: none;
             outline: none;
             cursor: pointer;
@@ -555,12 +579,12 @@
 
         .slider-input::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: white;
-            border: 4px solid var(--burgundy);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 4px solid var(--red);
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
             cursor: grab;
         }
 
@@ -577,12 +601,12 @@
             margin-top: 1.5rem;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--burgundy);
+            color: var(--red);
         }
 
         /* Quiz */
         .quiz-section {
-            background: linear-gradient(135deg, var(--wine), var(--burgundy));
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 50%, var(--red-darker) 100%);
             position: relative;
         }
 
@@ -607,16 +631,16 @@
         }
 
         .quiz-header {
-            background: var(--cream);
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
             padding: 2.5rem;
             text-align: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 3px solid var(--pink-dark);
         }
 
         .quiz-header h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--wine);
+            color: var(--red-dark);
         }
 
         .quiz-header p {
@@ -625,13 +649,13 @@
         }
 
         .progress-bar-container {
-            height: 6px;
-            background: #eee;
+            height: 8px;
+            background: var(--pink-light);
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            background: linear-gradient(90deg, var(--red), var(--red-dark));
             width: 14.28%;
             transition: width 0.5s ease;
         }
@@ -656,7 +680,7 @@
 
         .question-badge {
             display: inline-block;
-            background: linear-gradient(135deg, var(--burgundy), var(--wine));
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             color: white;
             padding: 0.4rem 1rem;
             border-radius: 100px;
@@ -668,7 +692,7 @@
         .question-text {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
-            color: var(--wine);
+            color: var(--red-dark);
             margin-bottom: 2rem;
             line-height: 1.5;
         }
@@ -680,7 +704,7 @@
         }
 
         .option-item {
-            background: var(--cream);
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
             border: 2px solid transparent;
             padding: 1.2rem 1.5rem;
             border-radius: 14px;
@@ -692,19 +716,18 @@
         }
 
         .option-item:hover {
-            border-color: var(--rose);
-            background: var(--blush);
+            border-color: var(--red);
         }
 
         .option-item.selected {
-            border-color: var(--burgundy);
-            background: var(--blush);
+            border-color: var(--red);
+            background: var(--pink-medium);
         }
 
         .option-item input {
             width: 20px;
             height: 20px;
-            accent-color: var(--burgundy);
+            accent-color: var(--red);
             cursor: pointer;
         }
 
@@ -717,7 +740,7 @@
         .scale-item {
             text-align: center;
             padding: 1.2rem 0.5rem;
-            background: var(--cream);
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
             border: 2px solid transparent;
             border-radius: 14px;
             transition: all 0.3s;
@@ -725,14 +748,14 @@
         }
 
         .scale-item:hover {
-            border-color: var(--rose);
+            border-color: var(--red);
             transform: translateY(-3px);
         }
 
         .scale-item.selected {
-            background: var(--burgundy);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             color: white;
-            border-color: var(--burgundy);
+            border-color: var(--red);
         }
 
         .scale-item .emoji {
@@ -750,7 +773,7 @@
             width: 100%;
             min-height: 130px;
             padding: 1.2rem;
-            border: 2px solid #ddd;
+            border: 3px solid var(--pink-dark);
             border-radius: 14px;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
@@ -760,7 +783,7 @@
 
         textarea:focus {
             outline: none;
-            border-color: var(--burgundy);
+            border-color: var(--red);
         }
 
         .btn-row {
@@ -784,38 +807,40 @@
         }
 
         .btn-primary {
-            background: var(--burgundy);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             color: white;
             flex: 1;
             justify-content: center;
+            box-shadow: 0 5px 20px rgba(196, 30, 58, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--wine);
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
         }
 
         .btn-secondary {
-            background: var(--cream);
-            color: var(--burgundy);
+            background: white;
+            color: var(--red);
+            border: 2px solid var(--pink-dark);
         }
 
         .btn-secondary:hover {
-            background: var(--blush);
+            background: var(--pink-light);
         }
 
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--wine);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            color: white;
             font-size: 1.1rem;
             padding: 1.2rem 2rem;
-            box-shadow: 0 10px 30px rgba(201, 169, 89, 0.4);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
         }
 
         .btn-submit:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(201, 169, 89, 0.5);
+            box-shadow: 0 15px 40px rgba(196, 30, 58, 0.5);
         }
 
         .completion-screen {
@@ -826,7 +851,7 @@
         .completion-screen h3 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--wine);
+            color: var(--red-dark);
             margin-bottom: 1rem;
         }
 
@@ -834,13 +859,13 @@
         .works-cited {
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 2px solid #eee;
+            border-top: 3px solid var(--pink-dark);
         }
 
         .works-cited h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            color: var(--wine);
+            color: var(--red-dark);
             margin-bottom: 1.5rem;
         }
 
@@ -848,12 +873,13 @@
             font-size: 0.95rem;
             margin-left: 2rem;
             text-indent: -2rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             color: #444;
+            line-height: 1.6;
         }
 
         .works-cited a {
-            color: var(--burgundy);
+            color: var(--red);
             text-decoration: none;
         }
 
@@ -863,7 +889,7 @@
 
         /* About */
         .about-section {
-            background: var(--blush);
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
         }
 
         .about-card {
@@ -881,7 +907,7 @@
 
         /* Footer */
         footer {
-            background: var(--wine);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 50%, var(--red-darker) 100%);
             color: white;
             padding: 4rem 3rem;
             text-align: center;
@@ -894,15 +920,21 @@
         }
 
         .footer-tagline {
-            opacity: 0.8;
+            opacity: 0.9;
             margin-bottom: 0.5rem;
+        }
+
+        .footer-author {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
         /* Lightbox */
         .lightbox {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(45, 0, 0, 0.95);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -921,6 +953,7 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 8px;
+            border: 3px solid var(--pink-dark);
         }
 
         .lightbox-close {
@@ -933,7 +966,7 @@
             border: none;
             border-radius: 50%;
             font-size: 1.5rem;
-            color: var(--burgundy);
+            color: var(--red);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -943,6 +976,21 @@
 
         .lightbox-close:hover {
             transform: rotate(90deg);
+        }
+
+        /* Placeholder for missing images */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink-medium) 100%);
+            border: 3px dashed var(--red);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .image-placeholder p {
+            color: var(--red);
+            font-style: italic;
         }
 
         /* Responsive */
@@ -963,7 +1011,7 @@
             }
 
             .hero-bg::after {
-                background: linear-gradient(0deg, var(--cream) 0%, transparent 50%);
+                background: linear-gradient(0deg, var(--pink-light) 0%, transparent 50%);
             }
 
             .scroll-hint {
@@ -997,7 +1045,7 @@
                 flex-direction: column;
                 padding: 1.5rem;
                 gap: 1rem;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
             }
 
             .nav-links.active {
@@ -1053,6 +1101,7 @@
             <span class="hero-tag">Interactive Critical Analysis</span>
             <h1>The <span>Confidence</span> Corset</h1>
             <p class="hero-subtitle">How Restrictive Clothing Increases Women's Confidence, and What That Reveals About Patriarchy</p>
+            <p class="hero-author">By Victory Anthony-Nted</p>
             <a href="#article" class="hero-cta">Begin Your Journey</a>
         </div>
         <div class="scroll-hint">
@@ -1101,10 +1150,8 @@
 
             <div class="article-content">
                 <p class="article-intro">
-                    Picture a woman stepping into a boardroom in four-inch stilettos, her confidence soaring with each painful click against the floor. Imagine another woman pulling on shapewear so tight it restricts her breathing, yet feeling empowered as she smooths down her dress.
+                    Picture a woman stepping into a boardroom in four-inch stilettos, her confidence soaring with each painful click against the floor. Imagine another woman pulling on shapewear so tight it restricts her breathing, yet feeling empowered as she smooths down her dress. This is the confidence corset: not just a Victorian style, but a living paradox where restriction and empowerment intertwine in ways that expose the insidious mechanics of patriarchal ideology.
                 </p>
-
-                <p>This is the confidence corset: not just a Victorian relic, but a living paradox where restriction and empowerment intertwine in ways that expose the insidious mechanics of patriarchal ideology.</p>
 
                 <p>How can clothing that physically constrains us make us feel more confident? And what does this contradiction reveal about the systems that govern women's bodies?</p>
 
@@ -1137,9 +1184,11 @@
 
                 <h2>The Seductive Logic of Restriction</h2>
 
-                <p>The answer lies in understanding how patriarchal ideology operates through normalized violence disguised as aspiration rather than overt force. Ideological criticism reveals that restrictive clothing functions to appear natural and desirable while actually serving structures of domination (Foss 237).</p>
+                <p>The answer lies in understanding how patriarchal ideology operates through normalized violence disguised as aspiration rather than overt force. Ideological criticism reveals that restrictive clothing functions to appear natural and desirable while actually serving structures of domination (Foss 237). When we accept foot deformities from high heels as the price of professionalism, or organ compression from shapewear as the cost of beauty, we have internalized an ideology that equates women's worth with their ability to conform to painful standards.</p>
 
-                <p>When we accept foot deformities from high heels as the price of professionalism, or organ compression from shapewear as the cost of beauty, we have internalized an ideology that equates women's worth with their ability to conform to painful standards.</p>
+                <p>This is the brilliance of oppressive systems: they convince the oppressed to participate willingly, even enthusiastically, in their own constraint. The confidence women feel in restrictive clothing is not imaginary. It is real, earned through successfully navigating a system that rewards conformity and punishes deviation. But that confidence comes with a price tag written in compressed ribs, blistered feet, and restricted movement.</p>
+
+                <p>Consider the visual rhetoric of women's fashion throughout history. Photographs of Victorian women in corsets, their waists cinched to dangerous proportions, were presented as images of refinement and status. The physical damage of displaced organs, broken ribs, and restricted breathing was rendered invisible, while the ideal silhouette became the only image worth seeing.</p>
 
                 <!-- Image Gallery -->
                 <div class="gallery-grid">
@@ -1149,15 +1198,15 @@
                             <span>Vintage 1950s Red Stilettos</span>
                         </div>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('images/Slut_Walk_Chicago.jpg')">
-                        <img src="images/Slut_Walk_Chicago.jpg" alt="SlutWalk Chicago">
+                    <div class="gallery-item" onclick="openLightbox('images/Jean-Paul_Gaultier_bustier_Montreal_expo_2011.jpg')">
+                        <img src="images/Jean-Paul_Gaultier_bustier_Montreal_expo_2011.jpg" alt="Jean-Paul Gaultier Bustier">
                         <div class="gallery-overlay">
-                            <span>SlutWalk: Reclaiming Autonomy</span>
+                            <span>Jean-Paul Gaultier Bustier, 2011</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slider - keeping emojis only here -->
+                <!-- Slider -->
                 <div class="slider-card">
                     <h3 class="slider-question">How much pressure do you feel to wear restrictive clothing?</h3>
                     <input type="range" min="0" max="100" value="50" class="slider-input" id="pressureSlider">
@@ -1168,15 +1217,28 @@
                     <div class="slider-value" id="sliderValue">50% 😐</div>
                 </div>
 
-                <p>This is the brilliance of oppressive systems: they convince the oppressed to participate willingly, even enthusiastically, in their own constraint. The confidence women feel in restrictive clothing is not imaginary—it is real, earned through successfully navigating a system that rewards conformity and punishes deviation.</p>
-
                 <h2>The Paradox of Empowerment</h2>
 
-                <p>Feminist criticism provides essential tools for analyzing this paradox, revealing how patriarchal systems have historically portrayed women's bodies as naturally deficient, requiring constant modification and restraint to achieve acceptability (Foss 142).</p>
+                <p>Dismissing women's experiences of confidence as false consciousness commits its own fallacy. The appeal to authority assumes we know better than women themselves what they should feel. This is where feminist criticism demands we hold multiple truths simultaneously: women can feel genuinely empowered by their clothing choices and those choices can still reflect patriarchal conditioning. According to Foss, generating multiple perspectives allows us to reveal that "the perspective being presented as dominant and natural is not the only one available" (147). The confidence is not fake; the system that makes restriction necessary for confidence is what needs interrogating.</p>
 
+                <p>When a woman says she feels powerful in heels, she is not lying. She is accurately reading a social system that does grant her more authority, attention, and respect when she performs femininity correctly. The problem is we have built a world where confidence requires physical constraint.</p>
+                           <div class="gallery-item" onclick="openLightbox('images/red-heels-cropped.jpg')">
+                        <img src="images/red-heels-cropped.jpg" alt="Red heels">
+                        <div class="gallery-overlay">
+                            <span>Beauty Standards: Liberation or Constraint?</span>
+                        </div>
+                    </div>
+               
                 <div class="pull-quote">
-                    <p>We must ask: whose definition of empowerment requires women to experience physical pain as a prerequisite for professional respect?</p>
+                    <p>When a woman wears a corset that complements her body, she often experiences a boost in self-assurance. The way a well-fitted corset cinches the waist and accentuates curves can make a woman feel strong, beautiful, and ready to take on the world.</p>
+                    <cite>— Laura Bartlett, House of Coco</cite>
                 </div>
+
+                <p>This captures the genuine empowerment women experience, yet it also reveals the troubling reality: women found agency within oppression, which is both an achievement worth recognizing and a condition worth dismantling.</p>
+
+                <p>The intersectional nature of this paradox becomes even clearer when considering how different identities shape women's experiences. Research demonstrates that African Americans who maintain racial identity as central to their sense of self show protective buffering against body dissatisfaction's negative effects on self-esteem (Tylka and Calogero 454). Similarly, lesbian and queer women often report rejecting traditional feminine presentation standards, with some finding empowerment in masculine or androgynous dress that explicitly refuses patriarchal expectations of female attractiveness. This suggests that strong alternative identity frameworks can provide some resistance to patriarchal beauty standards, yet most women lack such protective buffers.</p>
+
+                <p>This strategy of reframing shifts from "restrictive clothing is always oppressive" to "restrictive clothing reveals how patriarchy offers limited pathways to power." According to Foss, reframing is "the process of shifting perspective to view a different situation from a different vantage point" (150). This opens new analytical possibilities. We stop judging individual women's choices and start examining why those choices exist within such narrow parameters.</p>
 
                 <!-- Poll 2 -->
                 <div class="poll-card">
@@ -1214,7 +1276,11 @@
 
                 <h2>When Choice Is Not Free</h2>
 
-                <p>This is where rhetorical fallacy analysis becomes crucial. The fashion industry relies heavily on the false dilemma fallacy: either embrace restrictive clothing and feel confident, or reject it and feel unfeminine, unprofessional, or undesirable.</p>
+                <p>We must identify the rhetorical fallacies that defend these systems. The false dilemma appears constantly: women must choose between modesty and empowerment, as if no other options exist. This thinking obscures the reality that patriarchy constrains all options, whether a woman chooses a corset or combat boots, a crop top or a miniskirt. The patriarchal system consistently prioritizes male comfort across all spheres of society. In professional workplaces, dress codes mandate that women wear heels and restrictive clothing that limit mobility while men enjoy comfortable, practical attire.</p>
+
+                <p>The appeal to tradition uses historical precedent to justify continued harm. Women have always worn restrictive clothing, the argument goes, conveniently ignoring that longevity does not equal morality. The naturalistic fallacy compounds this by claiming restrictive clothing is naturally feminine, confusing cultural construction with biological essence. There is nothing natural about waist training or foot binding; these are ideological projects with real physical consequences.</p>
+
+                <p>Most insidiously, victim-blaming rhetoric connects clothing restriction to violence against women. "What was she wearing?" This question shifts responsibility from perpetrator to victim, implying that women's clothing choices cause men's violence. This fallacy reveals the stakes of bodily autonomy: when clothing policing connects to rape culture and femicide.</p>
 
                 <!-- Poll 3 -->
                 <div class="poll-card">
@@ -1250,19 +1316,24 @@
                     <p class="poll-total">0 votes</p>
                 </div>
 
-                <h2>Digital Resistance</h2>
+                <h2>Digital Resistance and Visual Reclamation</h2>
 
-                <p>Visual rhetoric offers hope for resistance. Movements like SlutWalk deploy visual rhetoric to reclaim women's bodily autonomy from systems that police female appearance.</p>
+                <p>Digital rhetoric has created new spaces for resistance, where movements like <a href="https://en.wikipedia.org/wiki/Free_the_nipple" target="_blank">#FreeTheNipple</a> challenge the double standards that sexualize women's bodies while leaving men unrestricted. Body positivity communities online share unfiltered images: the reality behind the Instagram facade, the marks shapewear leaves, the pain heels cause. These images disrupt the visual rhetoric that presents restrictions as glamorous.</p>
 
-                <!-- Featured image -->
-                <div class="gallery-grid" style="grid-template-columns: 1fr;">
-                    <div class="gallery-item" style="aspect-ratio: 16/9;" onclick="openLightbox('images/red-heels-cropped.jpg')">
-                        <img src="images/red-heels-cropped.jpg" alt="Red heels" style="object-position: bottom;">
+                <p>This is rhetorical reclamation in action: taking the tools of oppression and repurposing them for liberation. When women post before and after corset photos that highlight organ displacement rather than hide it, they use visual rhetoric to expose what ideology normally conceals. According to Foss, by "deliberately presenting many different views on a subject, a rhetor makes clear that the perspective being presented as dominant and natural is not the only one available" (147).</p>
+
+                <p>Protest imagery amplifies this strategy. <a href="https://www.npr.org/2011/06/09/137080514/slutwalk-goes-global-to-protest-sexual-assault" target="_blank">SlutWalk</a> demonstrations juxtapose provocative clothing with messages demanding bodily autonomy, shifting perspective by creating incongruity. According to Foss, this strategy merges "categories typically believed to be mutually exclusive," which "disrupts settled assumptions and beliefs" (153-154). These protests reveal women's clothing does not cause violence; men's violence causes violence.</p>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox('images/Slut_Walk_Chicago.jpg')">
+                        <img src="images/Slut_Walk_Chicago.jpg" alt="SlutWalk Chicago">
                         <div class="gallery-overlay">
-                            <span>Beauty standards: liberation or constraint?</span>
+                            <span>SlutWalk: Reclaiming Bodily Autonomy</span>
                         </div>
                     </div>
-                </div>
+         
+
+
 
                 <!-- Poll 4 -->
                 <div class="poll-card">
@@ -1300,7 +1371,9 @@
 
                 <h2>The Violence Normalized as Beauty</h2>
 
-                <p>Ideological criticism demands we name what we have been taught not to see: restrictive clothing is a form of normalized violence (Foss 237). When fashion requires physical pain, limited mobility, and health risks, yet we call this beauty rather than harm, we are witnessing ideology at work.</p>
+                <p>Ideological criticism demands we name what we have been taught not to see: restrictive clothing is a form of normalized violence (Foss 237). When fashion requires physical pain, limited mobility, and health risks, yet we call this beauty rather than harm, we are witnessing ideology at work. The system has successfully convinced us that women's suffering in pursuit of aesthetic ideals is not just acceptable but admirable, evidence of dedication, discipline, and femininity.</p>
+
+                <p>The confidence corset operates through this mechanism. Women's confidence is real, earned through meeting impossible standards. But this creates a trap: the better women become at navigating oppression, the more the system appears voluntary rather than coercive.</p>
 
                 <h2>Where Do We Go From Here?</h2>
 
@@ -1338,17 +1411,33 @@
                     <p class="poll-total">0 votes</p>
                 </div>
 
-                <p>True empowerment should not come with organ damage as a side effect. And true freedom means women can find power in any clothing—or none at all—without their choices determining their worth, their safety, or their humanity.</p>
+                <p>True empowerment should not come with organ damage as a side effect. And true freedom means women can find power in any clothing, or none at all, without their choices determining their worth, their safety, or their humanity.</p>
 
-                <p>The corset may be a relic of the past, but its logic persists in every painful shoe, every restrictive undergarment, every dress code that prioritizes men's comfort over women's autonomy. Until we dismantle the ideology that makes restriction necessary for confidence, we are still wearing corsets. We have just learned to call them something else.</p>
+                <p>The corset may be a relic of the past, but its logic persists in every painful shoe, every restrictive undergarment, every dress code that prioritizes men's comfort over women's autonomy. Until we dismantle the ideology that makes restriction necessary for confidence, we are still wearing corsets. According to Foss, understanding the "ideology of domination" requires recognizing "the belief in a notion of superior and inferior, and its concomitant ideology that the superior should rule over the inferior" (142). We have just learned to call them something else.</p>
 
-                <!-- Works Cited -->
+                <!-- Works Cited - COMPLETE -->
                 <div class="works-cited">
                     <h3>Works Cited</h3>
-                    <p>Bartlett, Laura. "How the Corset Trend is Empowering Women." <em>House of Coco</em>, Sept. 2023, <a href="https://houseofcoco.net/how-the-corset-trend-is-empowering-women/" target="_blank">houseofcoco.net</a>.</p>
+                    
+                    <p>Bartlett, Laura. "How the Corset Trend is Empowering Women." <em>House of Coco</em>, Sept. 2023, <a href="https://houseofcoco.net/how-the-corset-trend-is-empowering-women/" target="_blank">houseofcoco.net/how-the-corset-trend-is-empowering-women/</a>.</p>
+                    
+                    <p>Blawas, Paige. "SlutWalk Coming to Penn State." <em>Onward State</em>, 12 Oct. 2011, <a href="https://onwardstate.com/2011/10/12/slutwalk-coming-to-penn-state/" target="_blank">onwardstate.com/2011/10/12/slutwalk-coming-to-penn-state/</a>.</p>
+                    
+                    <p>Charmainezoe. "Vintage 1950's Red Stiletto High Heels." <em>Flickr</em>, 2011, <a href="https://www.flickr.com/photos/charmainezoe/5524102748/" target="_blank">www.flickr.com/photos/charmainezoe/5524102748/</a>.</p>
+                    
                     <p>Foss, Sonja K. "Feminist Criticism." <em>Rhetorical Criticism: Exploration and Practice</em>, 5th ed., Waveland Press, 2018, pp. 141-178.</p>
+                    
                     <p>Foss, Sonja K. "Ideological Criticism." <em>Rhetorical Criticism: Exploration and Practice</em>, 5th ed., Waveland Press, 2018, pp. 237-78.</p>
-                    <p>Tylka, Tracy L., and Rachel M. Calogero. "Fiction, Fashion, and Function Finale." <em>Sex Roles</em>, vol. 65, 2011, pp. 447-460.</p>
+                    
+                    <p>"Free the Nipple." <em>Wikipedia</em>, Wikimedia Foundation, <a href="https://en.wikipedia.org/wiki/Free_the_nipple" target="_blank">en.wikipedia.org/wiki/Free_the_nipple</a>. Accessed 27 Nov. 2025.</p>
+                    
+                    <p>G, Karola. "A Person Wearing a Red High Heels." <em>Pexels</em>, 2020, <a href="https://www.pexels.com/photo/a-person-wearing-a-red-high-heels-5713295/" target="_blank">www.pexels.com/photo/a-person-wearing-a-red-high-heels-5713295/</a>.</p>
+                    
+                    <p>"Jean-Paul Gaultier Bustier Montreal Expo 2011." <em>Wikimedia Commons</em>, 2011, <a href="https://commons.wikimedia.org/wiki/File:Jean-Paul_Gaultier_bustier_Montreal_expo_2011.jpg" target="_blank">commons.wikimedia.org/wiki/File:Jean-Paul_Gaultier_bustier_Montreal_expo_2011.jpg</a>.</p>
+                    
+                    <p>NPR Staff. "'Slutwalk' Goes Global To Protest Sexual Assault." <em>NPR</em>, 9 June 2011, <a href="https://www.npr.org/2011/06/09/137080514/slutwalk-goes-global-to-protest-sexual-assault" target="_blank">www.npr.org/2011/06/09/137080514/slutwalk-goes-global-to-protest-sexual-assault</a>.</p>
+                    
+                    <p>Tylka, Tracy L., and Rachel M. Calogero. "Fiction, Fashion, and Function Finale: An Introduction and Conclusion to the Special Issue on Gendered Body Image, Part III." <em>Sex Roles</em>, vol. 65, 2011, pp. 447-460.</p>
                 </div>
             </div>
         </div>
@@ -1358,7 +1447,7 @@
     <section class="quiz-section" id="quiz">
         <div class="quiz-container">
             <div class="section-header" style="margin-bottom: 2rem;">
-                <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white;">Interactive Quiz</span>
+                <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.3);">Interactive Quiz</span>
                 <h2 class="section-title" style="color: white;">Share Your Perspective</h2>
             </div>
 
@@ -1392,7 +1481,7 @@
                             </label>
                             <label class="option-item">
                                 <input type="radio" name="q1" value="digital">
-                                <span>Digital Resistance</span>
+                                <span>Digital Resistance and Visual Reclamation</span>
                             </label>
                             <label class="option-item">
                                 <input type="radio" name="q1" value="violence">
@@ -1568,7 +1657,7 @@
                         <div class="completion-screen">
                             <h3>Thank You!</h3>
                             <p style="color: #666; margin-bottom: 1rem;">Your perspectives help continue this important conversation about bodily autonomy and empowerment.</p>
-                            <p style="color: var(--burgundy); font-weight: 600;">Keep questioning. Keep dismantling.</p>
+                            <p style="color: var(--red); font-weight: 600;">Keep questioning. Keep dismantling.</p>
                         </div>
                     </div>
                 </div>
@@ -1595,6 +1684,7 @@
         <p class="footer-logo">The Confidence Corset</p>
         <p class="footer-tagline">An Interactive Critical Analysis</p>
         <p>Keep questioning. Keep dismantling.</p>
+        <p class="footer-author">By Victory Anthony-Nted</p>
     </footer>
 
     <!-- Lightbox -->
